@@ -1,0 +1,21 @@
+services:
+  
+  postgres:
+    image: postgres:17
+    container_name: dragtrans-postgres
+  
+    environment:
+      POSTGRES_DB: dragtrans
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+  
+    volumes:
+      - dragtrans_postgres_data:/var/lib/postgresql/data
+
+    restart: always
+
+volumes:
+  dragtrans_postgres_data:

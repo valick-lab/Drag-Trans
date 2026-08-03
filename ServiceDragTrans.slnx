@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="DragTrans.Application/DragTrans.Application.csproj" />
+  <Project Path="DragTrans.Infrastructure/DragTrans.Infrastructure.csproj" />
+  <Project Path="DragTrans.Worker/DragTrans.Worker.csproj" />
+  <Project Path="src/DragTrans.API/DragTrans.API.csproj" />
+  <Project Path="src/DragTrans.Domain/DragTrans.Domain.csproj" />
+</Solution>
