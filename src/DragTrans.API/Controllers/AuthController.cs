@@ -1,4 +1,5 @@
-﻿using DragTrans.Application.Services.Register;
+﻿using DragTrans.Application.Services.LogIn;
+using DragTrans.Application.Services.Register;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DragTrans.API.Controllers;
@@ -8,10 +9,12 @@ namespace DragTrans.API.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly RegisterService _registerService;
+    private readonly LogInService _loginService;
 
-    public AuthController(RegisterService registerService)
+    public AuthController(RegisterService registerService, LogInService loginService)
     {
         _registerService = registerService;
+        _loginService = loginService;
     }
 
     [HttpPost("register")]
@@ -19,6 +22,15 @@ public class AuthController : ControllerBase
         RegisterRequest request)
     {
         var response = await _registerService.RegisterAsync(request);
+
+        return Ok(response);
+    }
+
+    [HttpPost("login")]
+    public async Task<ActionResult<LogInResponse>> Login(
+        LogInRequests request)
+    {
+        var response = await _loginService.LogInAsync(request);
 
         return Ok(response);
     }

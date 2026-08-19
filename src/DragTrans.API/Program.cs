@@ -3,6 +3,7 @@ using DragTrans.Application.Services.Register;
 using DragTrans.Infrastructure.Data;
 using DragTrans.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using DragTrans.Application.Services.LogIn;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<DragTransDbContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<RegisterService>();
+builder.Services.AddScoped<LogInService>(); ;
 
 builder.Services.AddControllers();
 
