@@ -1,13 +1,16 @@
 ﻿using DragTrans.Application.Interfaces;
+using DragTrans.Application.Services.Jwt;
 
 namespace DragTrans.Application.Services.LogIn;
 
 public class LogInService
 {
     private readonly IUserRepository _userRepository;
-    public LogInService(IUserRepository userRepository)
+    private readonly IJwtService _jwtService;
+    public LogInService(IUserRepository userRepository, IJwtService jwtService)
     {
         _userRepository = userRepository;
+        _jwtService = jwtService;
     }
 
     public async Task<LogInResponse> LogInAsync(LogInRequests request)
@@ -24,10 +27,13 @@ public class LogInService
             throw new Exception("Неверный пользователь, или пароль");
         }
 
+        var token = _jwtService.GenerateToken(user.Id, user.UserName);
+
         return new LogInResponse
         {
             Id = user.Id,
-            UserName = user.UserName
+            UserName = user.UserName,
+            Token = token
         };
     }
 }

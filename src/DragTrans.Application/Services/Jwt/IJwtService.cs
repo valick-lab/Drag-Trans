@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace DragTrans.Application.Services.Jwt;
 
-namespace DragTrans.Application.Services.Jwt
+public interface IJwtService
 {
-    internal class JwtService
-    {
-    }
+    string GenerateToken(Guid userId, string userName);
 }

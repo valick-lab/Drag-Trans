@@ -1,6 +1,8 @@
 ﻿using DragTrans.Application.Services.LogIn;
 using DragTrans.Application.Services.Register;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace DragTrans.API.Controllers;
 
@@ -33,5 +35,15 @@ public class AuthController : ControllerBase
         var response = await _loginService.LogInAsync(request);
 
         return Ok(response);
+    }
+    [Authorize]
+    [HttpGet("me")]
+    public IActionResult GetMe()
+    {
+        var userId = User.FindFirst(
+            JwtRegisteredClaimNames.Sub
+        )?.Value;
+
+        return Ok(userId);
     }
 }
