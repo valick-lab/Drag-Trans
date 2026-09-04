@@ -1,4 +1,6 @@
 using DragTrans.Application.Interfaces;
+using DragTrans.Application.Interfeces;
+using DragTrans.Application.Services.Files;
 using DragTrans.Application.Services.Jwt;
 using DragTrans.Application.Services.LogIn;
 using DragTrans.Application.Services.Register;
@@ -6,10 +8,9 @@ using DragTrans.Infrastructure.Data;
 using DragTrans.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using DragTrans.Application.Interfeces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,9 @@ builder.Services.AddScoped<IFileRepository, FileRepository>();
 builder.Services.AddScoped<RegisterService>();
 builder.Services.AddScoped<LogInService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<FileService>();
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 

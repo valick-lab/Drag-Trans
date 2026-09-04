@@ -19,5 +19,32 @@ public class FileService
     {
         if (file == null || file.Length == 0)
             throw new ArgumentException("Файл пустой.");
+
+        var storedName = Guid.NewGuid().ToString();
+
+        var storagePath = Path.Combine(@"E:\project\DRAGservice", userId.ToString());
+        Directory.CreateDirectory(storagePath);
+
+        var filePath = Path.Combine(storagePath, storedName);
+
+        await using var steam = new FileStream(filePath, FileMode.Create);
+
+        await file.CopyToAsync(steam);
+
+        var storedFile = new StoredFile
+        {
+            Id = Guid.NewGuid(),
+            UserId = userId,
+            OriginalName = file.FileName,
+            StoredName = storedName,
+            Size = file.Length,
+            ContentType = file.ContentType,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        await _fileRepository.AddAsync(storedFile);
+        await _fileRepository.SaveChangesAsync();
+
+        return storedFile;
     }
 }

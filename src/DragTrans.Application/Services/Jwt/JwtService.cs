@@ -19,12 +19,12 @@ public class JwtService : IJwtService
         var claims = new[]
         {
             new Claim(
-                JwtRegisteredClaimNames.Sub,
+                ClaimTypes.NameIdentifier,
                 userId.ToString()
             ),
 
             new Claim(
-                JwtRegisteredClaimNames.UniqueName,
+                ClaimTypes.Name,
                 userName
             )
         };
