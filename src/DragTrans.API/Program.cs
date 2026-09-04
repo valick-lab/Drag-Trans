@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 using System.Text;
+using DragTrans.Application.Interfeces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ var jwtSetting = builder.Configuration
 builder.Services.AddSingleton(jwtSetting);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IFileRepository, FileRepository>();
 
 builder.Services.AddScoped<RegisterService>();
 builder.Services.AddScoped<LogInService>();
