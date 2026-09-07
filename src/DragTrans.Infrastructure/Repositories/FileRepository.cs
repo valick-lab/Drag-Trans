@@ -21,7 +21,13 @@ public class FileRepository : IFileRepository
 
     public async Task<StoredFile?> GetByIdAsync(Guid id)
     {
-        return await _db.StoredFiles.FirstOrDefaultAsync(file => file.Id == id);
+        var AllFiles = await _db.StoredFiles.FirstOrDefaultAsync(file => file.Id == id);
+
+        if(AllFiles == null)
+        {
+            return null;
+        }
+        return AllFiles;
     }
 
     public async Task<List<StoredFile>> GetByUserIdAsync(Guid userId)
