@@ -47,4 +47,29 @@ public class FileService
 
         return storedFile;
     }
+
+    public async Task DeleteAsync(Guid fileId, Guid userId)
+    {
+        StoredFile? file = await _fileRepository.GetByIdAsync(fileId);
+
+        if (file == null)
+        {
+            throw new KeyNotFoundException("Файл не найден.");
+        }
+
+        if (file.UserId != userId)
+        {
+            throw new UnauthorizedAccessException(
+                "Вы не можете удалить этот файл.");
+        }
+
+        string filePath = Path.Combine(@"E:\project\DRAGservice", userId.ToString(), file.StoredName);
+
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+
+        await _fileRepository.DeleteAsync(file);
+    }
 }

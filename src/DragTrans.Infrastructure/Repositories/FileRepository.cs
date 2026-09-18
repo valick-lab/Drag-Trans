@@ -38,6 +38,8 @@ public class FileRepository : IFileRepository
     public async Task DeleteAsync(StoredFile file)
     {
         _db.StoredFiles.Remove(file);
+
+        await _db.SaveChangesAsync();
     }
 
     public async Task SaveChangesAsync()

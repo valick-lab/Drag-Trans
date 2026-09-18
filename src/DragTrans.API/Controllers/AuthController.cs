@@ -33,7 +33,6 @@ public class AuthController : ControllerBase
         LogInRequests request)
     {
         var response = await _loginService.LogInAsync(request);
-
         return Ok(response);
     }
     [Authorize]
@@ -44,6 +43,13 @@ public class AuthController : ControllerBase
             JwtRegisteredClaimNames.Sub
         )?.Value;
 
-        return Ok(userId);
+        return Ok(User);
     }
+
+    [Authorize]
+    [HttpPost("ChPass")]
+    public async Task<ActionResult> ChangePassword()
+    {
+
+    } 
 }
