@@ -45,11 +45,4 @@ public class AuthController : ControllerBase
 
         return Ok(User);
     }
-
-    [Authorize]
-    [HttpPost("ChPass")]
-    public async Task<ActionResult> ChangePassword()
-    {
-
-    } 
 }
