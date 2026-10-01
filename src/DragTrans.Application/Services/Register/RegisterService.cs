@@ -25,6 +25,7 @@ public class RegisterService
         var user = new User
         {
             Id = Guid.NewGuid(),
+            Email = request.Email,
             UserName = request.UserName,
             PasswordHash = passwordHash,
             CreateTime = DateTime.UtcNow
@@ -34,6 +35,7 @@ public class RegisterService
 
         return new RegisterResponse
         {
+            Email = user.Email,
             Id = user.Id,
             UserName = user.UserName
         };
