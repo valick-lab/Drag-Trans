@@ -14,6 +14,7 @@ public class DragTransDbContext : DbContext
     public DbSet<User> Users => Set<User>();
 
     public DbSet<StoredFile> StoredFiles => Set<StoredFile>();
+    public DbSet<EmailVerification> EmailVerifications => Set<EmailVerification>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
