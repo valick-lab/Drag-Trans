@@ -3,6 +3,7 @@ using System;
 using DragTrans.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DragTrans.Infrastructure.Migrations
 {
     [DbContext(typeof(DragTransDbContext))]
-    partial class DragTransDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261008211148_AddUserProfile")]
+    partial class AddUserProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,11 +114,18 @@ namespace DragTrans.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("AvatarFileName")
+                        .HasColumnType("text");
+
                     b.Property<string>("AvatarFilePath")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("text");
 

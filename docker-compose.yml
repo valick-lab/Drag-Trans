@@ -2,10 +2,10 @@ services:
   
   postgres:
     image: postgres:17
-    container_name: dragtrans-postgres
+    container_name: filethread-postgres
   
     environment:
-      POSTGRES_DB: dragtrans
+      POSTGRES_DB: filethread
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 

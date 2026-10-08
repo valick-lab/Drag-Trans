@@ -8,6 +8,4 @@ public class User
     public String PasswordHash { get; set; } = String.Empty;
     public DateTime CreateTime { get; set; }
     public bool EmailConfirmate { get; set; } = false;
-    public ICollection<StoredFile> Files { get; set; } = new List<StoredFile>();
-    public string? AvatarFileName { get; set; }
 }
