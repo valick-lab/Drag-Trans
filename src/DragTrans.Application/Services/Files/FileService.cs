@@ -22,7 +22,7 @@ public class FileService
 
         var storedName = Guid.NewGuid().ToString();
 
-        var storagePath = Path.Combine(@"E:\project\DRAGservice\Models_acc", userId.ToString(), "Files");
+        var storagePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "..", "..", "database", "storage", userId.ToString(), "Files");
         Directory.CreateDirectory(storagePath);
 
         var filePath = Path.Combine(storagePath, storedName);
@@ -63,7 +63,7 @@ public class FileService
                 "Вы не можете удалить этот файл.");
         }
 
-        string filePath = Path.Combine(@"E:\project\DRAGservice\Models_acc", userId.ToString(), "Files", file.StoredName);
+        var filePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "..", "..", "database", "storage", userId.ToString(), "Files", file.StoredName);
 
         if (File.Exists(filePath))
         {

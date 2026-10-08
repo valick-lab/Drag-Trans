@@ -13,5 +13,6 @@ public class EmailSenderRepository : IEmailSenderRepository
         {
             Port = 587,
             Credentials = new NetworkCredential("your-email@gmail.com", "your-password")
+    };
     }
 }
