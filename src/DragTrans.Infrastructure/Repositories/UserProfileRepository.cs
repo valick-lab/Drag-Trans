@@ -25,6 +25,8 @@ public class UserProfileRepository : IUserProfileRepository
     }
     public async Task AddAsync(UserProfile profile)
     {
+        await _dbContext.Users.AddAsync(profile.User);
+        await _dbContext.SaveChangesAsync();
     }
     public async Task UpdateAsync(UserProfile profile)
     {
