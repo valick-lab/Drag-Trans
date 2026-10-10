@@ -22,12 +22,9 @@ public class DragTransDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<UserProfile>()
-            .HasKey(profile => profile.UserId);
-
-        modelBuilder.Entity<UserProfile>()
             .HasOne(profile => profile.User)
             .WithOne()
-            .HasForeignKey<UserProfile>(profile => profile.UserId);
+            .HasForeignKey<UserProfile>("UserId");
 
         modelBuilder.Entity<StoredFile>()
             .HasOne(file => file.User)
