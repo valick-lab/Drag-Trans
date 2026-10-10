@@ -23,20 +23,13 @@ public class UserProfileRepository : IUserProfileRepository
     {
         return await _dbContext.UserProfiles.FirstOrDefaultAsync(profile => profile.User.Id == userId);
     }
-
-    public async Task AddAvatarAsync(Guid userId, string avatarFileName)
-    {
-
-    }
-
-    public async Task UpdateAvatarAsync(Guid userId, string avatarFileName)
+    public async Task AddAsync(UserProfile profile)
     {
     }
-    public async Task CreateDefaultProfileAsync(Guid userId, string userName, string email)
+    public async Task UpdateAsync(UserProfile profile)
     {
     }
-
-    public async Task UpdateIsOnlineStatusAsync(Guid userId)
+    public async Task SaveChangesAsync()
     {
     }
 
