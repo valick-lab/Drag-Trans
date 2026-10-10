@@ -6,7 +6,8 @@ public interface IUserProfileRepository
 {
     Task<UserProfile?> GetProfileByUserNameAsync(string userName);
     Task<UserProfile?> GetProfileByUserIdAsync(Guid userId);
-    Task AddAsync(UserProfile profile);
-    Task UpdateAsync(UserProfile profile);
-    Task SaveChangesAsync();
+    Task UpdateDescriptionAsync(string description, Guid userId);
+    Task UpdateAvatarFilePathAsync(string avatarFilePath, Guid userId);
+    Task AddDefaultAsync(UserProfile profile);
+    Task UpdateOnlineStatusAsync(Guid userId, bool isOnline);
 }

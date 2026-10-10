@@ -1,3 +1,4 @@
+
 using DragTrans.Infrastructure.Data;
 using DragTrans.Application.Interfaces;
 using DragTrans.Domain.Entities;
@@ -9,9 +10,9 @@ public class UserProfileRepository : IUserProfileRepository
 {
     private readonly DragTransDbContext _dbContext;
 
-    public UserProfileRepository (DragTransDbContext dbcontext)
+    public UserProfileRepository(DragTransDbContext dbContext)
     {
-        _dbContext = dbcontext;
+        _dbContext = dbContext;
     }
 
     public async Task<UserProfile?> GetProfileByUserNameAsync(string userName)
@@ -21,18 +22,27 @@ public class UserProfileRepository : IUserProfileRepository
 
     public async Task<UserProfile?> GetProfileByUserIdAsync(Guid userId)
     {
-        return await _dbContext.UserProfiles.FirstOrDefaultAsync(profile => profile.User.Id == userId);
-    }
-    public async Task AddAsync(UserProfile profile)
-    {
-        await _dbContext.Users.AddAsync(profile.User);
-        await _dbContext.SaveChangesAsync();
-    }
-    public async Task UpdateAsync(UserProfile profile)
-    {
-    }
-    public async Task SaveChangesAsync()
-    {
+        return await _dbContext.UserProfiles.FirstOrDefaultAsync(profile => profile.UserId == userId);
     }
 
+    public async Task UpdateDescriptionAsync(string description, Guid userId)
+    {
+        await _dbContext.UserProfiles.Where(profile => profile.UserId == userId).ExecuteUpdateAsync(x => x.SetProperty(profile => profile.Description, description));
+    }
+
+    public async Task UpdateAvatarFilePathAsync(string avatarFilePath, Guid userId)
+    {
+        await _dbContext.UserProfiles.Where(profile => profile.UserId == userId).ExecuteUpdateAsync(x => x.SetProperty(profile => profile.AvatarFilePath, avatarFilePath));
+    }
+
+    public async Task AddDefaultAsync(UserProfile profile)
+    {
+        await _dbContext.UserProfiles.AddAsync(profile);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateOnlineStatusAsync(Guid userId, bool isOnline)
+    {
+        await _dbContext.UserProfiles.Where(profile => profile.UserId == userId).ExecuteUpdateAsync(x => x.SetProperty(profile => profile.IsOnline, isOnline));
+    }
 }
